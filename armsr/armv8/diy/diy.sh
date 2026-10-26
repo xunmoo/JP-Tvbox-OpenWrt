@@ -4,7 +4,6 @@
 git clone --depth=1 https://github.com/nikkinikki-org/OpenWrt-nikki package/luci-app-nikki
 
 # Add luci-app-amlogic
-rm -rf package/luci-app-amlogic
 git clone -b main https://github.com/ophub/luci-app-amlogic.git package/luci-app-amlogic
 
 # Adjust packages
