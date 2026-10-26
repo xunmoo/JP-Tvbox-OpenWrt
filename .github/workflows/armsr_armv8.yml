@@ -66,6 +66,7 @@ jobs:
           openwrt_board: rk3566
           kernel_usage: flippy
           openwrt_kernel: 6.18.y
+          kernel_tags: 6.18.y
           openwrt_size: 256/2048
           builder_name: xunmoo
 
