@@ -2,13 +2,11 @@ name: Build ImmortalWrt-25.12 for armsr_armv8
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 1,16 * *"
 
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-25.12
+  REPO_BRANCH: v25.12.2
   TZ: Asia/Shanghai
 
 jobs:
@@ -65,16 +63,16 @@ jobs:
         uses: ophub/amlogic-s9xxx-openwrt@main
         with:
           openwrt_path: openwrt/bin/targets/armsr/armv8/*rootfs.tar.gz
-          openwrt_board: s905d
+          openwrt_board: rk3566
           kernel_usage: flippy
-          openwrt_kernel: 6.12.y
-          openwrt_size: 256/1024
-          builder_name: nantayo
+          openwrt_kernel: 6.18.y
+          openwrt_size: 256/2048
+          builder_name: xunmoo
 
       - name: Upload firmware to release
         run: |
           tag="OpenWrt_${{ env.FILE_DATE }}"
-          gh release create $tag --repo ${{ github.repository }} --title "$tag" --notes "$(printf '首次使用建议全新刷写\n* 基本信息\nIP: 192.168.2.2\n账户: root\n密码: password')" 2> /dev/null || true
+          gh release create $tag --repo ${{ github.repository }} --title "$tag" --notes "$(printf '首次使用建议全新刷写\n* 基本信息\nIP: 192.168.50.2\n账户: root\n密码: password')" 2> /dev/null || true
           gh release upload $tag ${{ env.PACKAGED_OUTPUTPATH }}/*.img.gz --repo ${{ github.repository }} --clobber
 
       - name: Delete old releases
